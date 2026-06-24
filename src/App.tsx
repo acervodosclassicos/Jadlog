@@ -20,12 +20,12 @@ export default function App() {
 
   // Core States
   const [settings, setSettings] = useState<SystemSettings>({
-    platformName: 'Jadlog',
+    platformName: 'Jadlog Express Rastreamento',
     logoUrl: '',
     primaryColor: '#B30000',
     updateIntervalDays: 2,
-    institutionalText: 'Jadlog Rastreamento - Plataforma corporativa de rastreamento de cargas e encomendas expressas.',
-    aboutUs: 'A Jadlog é uma das maiores empresas de logística de cargas expressas do Brasil, oferecendo alta precisão, rapidez e controle total de encomendas.',
+    institutionalText: 'Jadlog Express Rastreamento - Plataforma corporativa de rastreamento de cargas e encomendas expressas.',
+    aboutUs: 'A Jadlog Express Rastreamento é uma das maiores empresas de logística de cargas expressas do Brasil, oferecendo alta precisão, rapidez e controle total de encomendas.',
     contactEmail: 'contato@jadlog.com.br',
     contactPhone: '(11) 4004-0000'
   });

@@ -1252,9 +1252,9 @@ async function startServer() {
       const code = req.query.track || req.query.codigo || '';
       const cleanCode = typeof code === 'string' ? code.trim().toUpperCase() : '';
 
-      let title = "Jadlog | Rastreamento de Encomendas";
-      let description = "Consulte o status de sua entrega na Jadlog de forma simples e rápida.";
-      let ogTitle = "Jadlog Rastreamento";
+      let title = "Jadlog Express Rastreamento | Rastreamento de Encomendas";
+      let description = "Consulte o status de sua entrega de forma simples e rápida.";
+      let ogTitle = "Jadlog Express Rastreamento";
       let ogDescription = "Acompanhe o status, a rota e a previsão de entrega de sua encomenda em tempo real.";
 
       if (cleanCode) {
@@ -1326,9 +1326,9 @@ async function startServer() {
       const code = req.query.track || req.query.codigo || '';
       const cleanCode = typeof code === 'string' ? code.trim().toUpperCase() : '';
 
-      let title = "Jadlog | Rastreamento de Encomendas";
-      let description = "Consulte o status de sua entrega na Jadlog de forma simples e rápida.";
-      let ogTitle = "Jadlog Rastreamento";
+      let title = "Jadlog Express Rastreamento | Rastreamento de Encomendas";
+      let description = "Consulte o status de sua entrega de forma simples e rápida.";
+      let ogTitle = "Jadlog Express Rastreamento";
       let ogDescription = "Acompanhe o status, a rota e a previsão de entrega de sua encomenda em tempo real.";
 
       if (cleanCode) {

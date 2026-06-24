@@ -1,5 +1,5 @@
 {
-  "name": "Jadlog Rastreamento",
+  "name": "jadlogexpressrastreamento",
   "description": "Plataforma profissional de rastreamento de encomendas Jadlog Cargo, com painel administrativo e atualizações em tempo real.",
   "requestFramePermissions": [],
   "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
