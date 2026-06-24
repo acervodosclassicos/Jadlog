@@ -1243,12 +1243,152 @@ async function startServer() {
       server: { middlewareMode: true },
       appType: 'spa'
     });
+    
+    app.get('*', async (req, res, next) => {
+      if (req.path.includes('.') && !req.path.endsWith('.html')) {
+        return next();
+      }
+
+      const code = req.query.track || req.query.codigo || '';
+      const cleanCode = typeof code === 'string' ? code.trim().toUpperCase() : '';
+
+      let title = "Jadlog | Rastreamento de Encomendas";
+      let description = "Consulte o status de sua entrega na Jadlog de forma simples e rápida.";
+      let ogTitle = "Jadlog Rastreamento";
+      let ogDescription = "Acompanhe o status, a rota e a previsão de entrega de sua encomenda em tempo real.";
+
+      if (cleanCode) {
+        try {
+          const db = readDB();
+          const tracking = db.trackings.find((t: any) => t.id === cleanCode);
+          if (tracking) {
+            applyCatchUp(tracking, db.settings.updateIntervalDays || 2);
+            
+            let statusText = "Objeto Postado";
+            if (tracking.status === 'transit') statusText = "Em Trânsito";
+            else if (tracking.status === 'regional') statusText = "Recebido na Unidade Regional";
+            else if (tracking.status === 'delivery') statusText = "Saiu para Entrega";
+            else if (tracking.status === 'delivered') statusText = "Entregue";
+            else if (tracking.status === 'paused') statusText = "Pausado";
+            else if (tracking.status === 'canceled') statusText = "Cancelado";
+
+            title = `Jadlog Rastreio - ${tracking.id}`;
+            description = `Status: ${statusText} | Destinatário: ${tracking.recipientName} | Destino: ${tracking.recipientCity}-${tracking.recipientState}.`;
+            ogTitle = `Encomenda Jadlog: ${tracking.id}`;
+            ogDescription = `Status: ${statusText} • Destinatário: ${tracking.recipientName} • Destino: ${tracking.recipientCity}-${tracking.recipientState}. Clique para acompanhar em tempo real.`;
+          } else {
+            title = `Rastreio Jadlog - ${cleanCode}`;
+            ogTitle = `Rastreio Jadlog: ${cleanCode}`;
+            ogDescription = `Consulte o progresso de entrega desta encomenda de código ${cleanCode} em nosso painel oficial.`;
+          }
+        } catch (err) {
+          console.error('Error serving dynamic OG tags in dev mode:', err);
+        }
+      }
+
+      try {
+        const indexPath = path.join(process.cwd(), 'index.html');
+        let html = fs.readFileSync(indexPath, 'utf8');
+        html = await vite.transformIndexHtml(req.originalUrl, html);
+
+        const metaTags = `
+    <title>${title}</title>
+    <meta name="description" content="${description}" />
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="${ogTitle}" />
+    <meta property="og:description" content="${ogDescription}" />
+    <meta property="og:image" content="https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?auto=format&fit=crop&q=80&w=600" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image" />
+    <meta property="twitter:title" content="${ogTitle}" />
+    <meta property="twitter:description" content="${ogDescription}" />
+    <meta property="twitter:image" content="https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?auto=format&fit=crop&q=80&w=600" />
+        `;
+
+        html = html.replace(/<title>[\s\S]*?<\/title>/, '');
+        html = html.replace('</head>', `${metaTags}\n</head>`);
+
+        res.status(200).set({ 'Content-Type': 'text/html' }).end(html);
+      } catch (e) {
+        next(e);
+      }
+    });
+
     app.use(vite.middlewares);
   } else {
     const distPath = path.join(process.cwd(), 'dist');
     app.use(express.static(distPath));
+    
     app.get('*', (req, res) => {
-      res.sendFile(path.join(distPath, 'index.html'));
+      const code = req.query.track || req.query.codigo || '';
+      const cleanCode = typeof code === 'string' ? code.trim().toUpperCase() : '';
+
+      let title = "Jadlog | Rastreamento de Encomendas";
+      let description = "Consulte o status de sua entrega na Jadlog de forma simples e rápida.";
+      let ogTitle = "Jadlog Rastreamento";
+      let ogDescription = "Acompanhe o status, a rota e a previsão de entrega de sua encomenda em tempo real.";
+
+      if (cleanCode) {
+        try {
+          const db = readDB();
+          const tracking = db.trackings.find((t: any) => t.id === cleanCode);
+          if (tracking) {
+            applyCatchUp(tracking, db.settings.updateIntervalDays || 2);
+            
+            let statusText = "Objeto Postado";
+            if (tracking.status === 'transit') statusText = "Em Trânsito";
+            else if (tracking.status === 'regional') statusText = "Recebido na Unidade Regional";
+            else if (tracking.status === 'delivery') statusText = "Saiu para Entrega";
+            else if (tracking.status === 'delivered') statusText = "Entregue";
+            else if (tracking.status === 'paused') statusText = "Pausado";
+            else if (tracking.status === 'canceled') statusText = "Cancelado";
+
+            title = `Jadlog Rastreio - ${tracking.id}`;
+            description = `Status: ${statusText} | Destinatário: ${tracking.recipientName} | Destino: ${tracking.recipientCity}-${tracking.recipientState}.`;
+            ogTitle = `Encomenda Jadlog: ${tracking.id}`;
+            ogDescription = `Status: ${statusText} • Destinatário: ${tracking.recipientName} • Destino: ${tracking.recipientCity}-${tracking.recipientState}. Clique para acompanhar em tempo real.`;
+          } else {
+            title = `Rastreio Jadlog - ${cleanCode}`;
+            ogTitle = `Rastreio Jadlog: ${cleanCode}`;
+            ogDescription = `Consulte o progresso de entrega desta encomenda de código ${cleanCode} em nosso painel oficial.`;
+          }
+        } catch (err) {
+          console.error('Error serving dynamic OG tags in prod:', err);
+        }
+      }
+
+      const indexPath = path.join(distPath, 'index.html');
+      fs.readFile(indexPath, 'utf8', (err, html) => {
+        if (err) {
+          console.error(err);
+          return res.status(500).send('Error loading index.html');
+        }
+
+        const metaTags = `
+    <title>${title}</title>
+    <meta name="description" content="${description}" />
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="${ogTitle}" />
+    <meta property="og:description" content="${ogDescription}" />
+    <meta property="og:image" content="https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?auto=format&fit=crop&q=80&w=600" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image" />
+    <meta property="twitter:title" content="${ogTitle}" />
+    <meta property="twitter:description" content="${ogDescription}" />
+    <meta property="twitter:image" content="https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?auto=format&fit=crop&q=80&w=600" />
+        `;
+
+        let modifiedHtml = html.replace(/<title>[\s\S]*?<\/title>/, '');
+        modifiedHtml = modifiedHtml.replace('</head>', `${metaTags}\n</head>`);
+
+        res.status(200).set({ 'Content-Type': 'text/html' }).send(modifiedHtml);
+      });
     });
   }
 
