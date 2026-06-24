@@ -1,0 +1,243 @@
+{
+  "users": [
+    {
+      "id": "a780b5b9-43d2-4366-aa4b-f0cda33a9700",
+      "username": "admin",
+      "salt": "952be8d67491fa8194bccd8c3568f119",
+      "passwordHash": "3536d403bc678a91ee580adac7c67ef050a9eb782c9728199cd478669cef1a68fc1875148694cd599c9b137021ba77bbc0ba2e5d017cb159cbff846ea9d7bf41",
+      "name": "Administrador do Sistema"
+    }
+  ],
+  "trackings": [
+    {
+      "id": "BR123456789BR",
+      "recipientName": "Mariana Silva",
+      "senderCEP": "01001-000",
+      "recipientCEP": "22021-001",
+      "senderCity": "São Paulo",
+      "senderState": "SP",
+      "recipientCity": "Rio de Janeiro",
+      "recipientState": "RJ",
+      "postDate": "2026-06-21",
+      "postTime": "09:30",
+      "weight": 1.5,
+      "observations": "Cuidado: Conteúdo frágil (Eletrônicos)",
+      "status": "transit",
+      "currentCity": "Cajamar",
+      "currentState": "SP",
+      "deliveryEstimate": "2026-06-29",
+      "progressPercent": 30,
+      "autoUpdate": true,
+      "route": [
+        {
+          "city": "São Paulo",
+          "state": "SP",
+          "label": "Agência de Origem",
+          "active": true,
+          "order": 0
+        },
+        {
+          "city": "Cajamar",
+          "state": "SP",
+          "label": "Centro de Tratamento Logístico",
+          "active": true,
+          "order": 1
+        },
+        {
+          "city": "Aparecida",
+          "state": "SP",
+          "label": "Centro de Distribuição de Carga",
+          "active": false,
+          "order": 2
+        },
+        {
+          "city": "Duque de Caxias",
+          "state": "RJ",
+          "label": "Centro de Distribuição Regional",
+          "active": false,
+          "order": 3
+        },
+        {
+          "city": "Rio de Janeiro",
+          "state": "RJ",
+          "label": "Unidade Regional de Distribuição",
+          "active": false,
+          "order": 4
+        },
+        {
+          "city": "Rio de Janeiro",
+          "state": "RJ",
+          "label": "Endereço de Destino",
+          "active": false,
+          "order": 5
+        }
+      ],
+      "events": [
+        {
+          "id": "12ba9ef0-9a26-4fa3-9356-2284e12e7ca0",
+          "city": "São Paulo",
+          "state": "SP",
+          "date": "2026-06-21",
+          "time": "09:30",
+          "description": "Objeto postado na agência de origem.",
+          "type": "posted"
+        },
+        {
+          "id": "68559b83-378d-4b85-8fa9-756cd14ac6ea",
+          "city": "Cajamar",
+          "state": "SP",
+          "date": "2026-06-23",
+          "time": "09:30",
+          "description": "Objeto em transferência para a unidade de triagem.",
+          "type": "transit"
+        }
+      ],
+      "createdAt": "2026-06-21T14:17:18.886Z"
+    },
+    {
+      "id": "BR987654321BR",
+      "recipientName": "Carlos Souza",
+      "senderCEP": "30110-001",
+      "recipientCEP": "90010-001",
+      "senderCity": "Belo Horizonte",
+      "senderState": "MG",
+      "recipientCity": "Porto Alegre",
+      "recipientState": "RS",
+      "postDate": "2026-06-13",
+      "postTime": "14:20",
+      "weight": 0.8,
+      "observations": "Documentos urgentes",
+      "status": "delivered",
+      "currentCity": "Porto Alegre",
+      "currentState": "RS",
+      "deliveryEstimate": "2026-06-23",
+      "progressPercent": 100,
+      "autoUpdate": false,
+      "route": [
+        {
+          "city": "Belo Horizonte",
+          "state": "MG",
+          "label": "Agência de Origem",
+          "active": true,
+          "order": 0
+        },
+        {
+          "city": "Betim",
+          "state": "MG",
+          "label": "Centro de Tratamento Logístico",
+          "active": true,
+          "order": 1
+        },
+        {
+          "city": "Campinas",
+          "state": "SP",
+          "label": "Centro de Distribuição de Carga",
+          "active": true,
+          "order": 2
+        },
+        {
+          "city": "Canoas",
+          "state": "RS",
+          "label": "Centro de Distribuição Regional",
+          "active": true,
+          "order": 3
+        },
+        {
+          "city": "Porto Alegre",
+          "state": "RS",
+          "label": "Unidade Regional de Distribuição",
+          "active": true,
+          "order": 4
+        },
+        {
+          "city": "Porto Alegre",
+          "state": "RS",
+          "label": "Endereço de Destino",
+          "active": true,
+          "order": 5
+        }
+      ],
+      "events": [
+        {
+          "id": "6c424c60-1531-4a83-9f52-14d50490e35a",
+          "city": "Belo Horizonte",
+          "state": "MG",
+          "date": "2026-06-13",
+          "time": "14:20",
+          "description": "Objeto postado na agência de origem.",
+          "type": "posted"
+        },
+        {
+          "id": "13fd5f2e-50bd-4f9f-8c75-f051d969bbf7",
+          "city": "Betim",
+          "state": "MG",
+          "date": "2026-06-15",
+          "time": "08:15",
+          "description": "Objeto em transferência para o Centro de Distribuição.",
+          "type": "transit"
+        },
+        {
+          "id": "cb6bfc30-f51c-4923-ad4b-9c6340a46a83",
+          "city": "Campinas",
+          "state": "SP",
+          "date": "2026-06-17",
+          "time": "19:40",
+          "description": "Objeto recebido no centro de distribuição regional.",
+          "type": "hub"
+        },
+        {
+          "id": "c1a65955-15d3-4756-a8a9-72cae0832a54",
+          "city": "Canoas",
+          "state": "RS",
+          "date": "2026-06-19",
+          "time": "11:10",
+          "description": "Objeto em transferência para a unidade regional.",
+          "type": "regional"
+        },
+        {
+          "id": "638aa901-a5bd-4466-834b-9bc240192a70",
+          "city": "Porto Alegre",
+          "state": "RS",
+          "date": "2026-06-21",
+          "time": "09:00",
+          "description": "Objeto saiu para entrega ao destinatário.",
+          "type": "delivery"
+        },
+        {
+          "id": "7ddea306-7ea0-4433-b49e-19cf1dbcf2aa",
+          "city": "Porto Alegre",
+          "state": "RS",
+          "date": "2026-06-23",
+          "time": "15:30",
+          "description": "Objeto entregue ao destinatário com sucesso.",
+          "type": "delivered"
+        }
+      ],
+      "createdAt": "2026-06-13T14:17:18.886Z"
+    }
+  ],
+  "settings": {
+    "platformName": "Jadlog",
+    "logoUrl": "",
+    "primaryColor": "#B30000",
+    "updateIntervalDays": 2,
+    "institutionalText": "A Jadlog é uma das maiores operadoras logísticas do país, especializada no transporte de cargas expressas e distribuição de encomendas corporativas e e-commerce.",
+    "aboutUs": "A Jadlog oferece alta precisão, rapidez e controle total de encomendas nacionais e internacionais, com soluções modernas e eficientes para todas as suas necessidades de frete.",
+    "contactEmail": "contato@jadlog.com.br",
+    "contactPhone": "(11) 4004-0000"
+  },
+  "logs": [
+    {
+      "id": "29a0791b-7fc8-4546-8bd6-9d1d76b2e0e8",
+      "timestamp": "2026-06-24T14:32:49.992Z",
+      "action": "Login Efetuado",
+      "details": "Administrador Administrador do Sistema fez login no painel."
+    },
+    {
+      "id": "8c85f12b-6643-4ba2-84a0-19d519950aca",
+      "timestamp": "2026-06-24T14:17:18.886Z",
+      "action": "Instalação do Sistema",
+      "details": "Banco de dados inicial provisionado com sucesso para a Jadlog."
+    }
+  ]
+}

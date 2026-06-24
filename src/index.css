@@ -1,0 +1,29 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=JetBrains+Mono:wght@300;400;500;600&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, monospace;
+}
+
+/* Custom styles for professional tracking application */
+@layer base {
+  body {
+    @apply font-sans antialiased text-neutral-100 bg-[#0A0A0A];
+  }
+}
+
+/* Print layout for tracking tags */
+@media print {
+  .no-print {
+    display: none !important;
+  }
+  .print-area {
+    display: block !important;
+    width: 100% !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    color: black !important;
+    background: white !important;
+  }
+}
